@@ -9,6 +9,7 @@ At its core, this is a Producer–Consumer problem implemented with:
 - Semaphores → for synchronization and mutual exclusion.
 
 # Architecture
+````
            ┌──────────────────────┐
            │   Manager Process    │
            │ (Producer of tasks)  │
@@ -25,7 +26,7 @@ At its core, this is a Producer–Consumer problem implemented with:
      ▼               ▼                ▼
  Worker 1       Worker 2         Worker 3
  (Consumer)     (Consumer)       (Consumer)
-
+````
 
 - The manager process continuously produces new tasks and stores them in the shared queue,
   while multiple worker processes concurrently fetch and execute them.
@@ -42,39 +43,15 @@ At its core, this is a Producer–Consumer problem implemented with:
   
 ------
 
-🧠 Logic Summary
-Producer (Manager Process)
-
-Wait for an empty slot (sem_wait(empty)).
-
-Lock the queue (sem_wait(mutex)).
-
-Add a new task.
-
-Unlock queue (sem_post(mutex)).
-
-Signal task availability (sem_post(full)).
-
-Consumer (Worker Process)
-
-Wait for a task (sem_wait(full)).
-
-Lock the queue (sem_wait(mutex)).
-
-Remove a task.
-
-Unlock queue (sem_post(mutex)).
-
-Signal empty slot (sem_post(empty)).
-
 # File Structure
+```bash
 task_queue/
 ├── manager.c       # Producer process code
 ├── worker.c        # Consumer process code
 ├── shared.h        # Shared data structures & constants
 ├── build.sh        # Build script
 ├── README.md       # Documentation
-
+````
 ------
 
 # System Calls & Libraries Used
@@ -146,3 +123,4 @@ Once this base system works, you can extend it:
 - Implement task acknowledgment (workers send back completion status).
 - Add logging for queue status and performance.
 - Convert to Message Passing version using POSIX message queues for comparison.
+
