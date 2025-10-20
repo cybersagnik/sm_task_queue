@@ -1,6 +1,6 @@
-Shared Memory Task Queue (Producer–Consumer IPC System)
+# Shared Memory Task Queue (Producer–Consumer IPC System)
 
-# Overview
+## Overview
 This project implements a Task Queue system using the Shared Memory model of Inter-Process Communication (IPC).
 It demonstrates how multiple processes can communicate and synchronize through a shared memory segment — without corrupting data or blocking each other.
 
@@ -8,7 +8,7 @@ At its core, this is a Producer–Consumer problem implemented with:
 - Shared Memory → for fast communication.
 - Semaphores → for synchronization and mutual exclusion.
 
-# Architecture
+## Architecture
 ````
            ┌──────────────────────┐
            │   Manager Process    │
@@ -33,8 +33,8 @@ At its core, this is a Producer–Consumer problem implemented with:
   
 ------
 
-# Components
-## Component	Description : 
+## Components
+### Component	Description : 
 - SharedQueue	Circular queue structure stored in shared memory.
 - shm_open, mmap	Used to create and map shared memory into each process.
 - sem_open, sem_wait, sem_post	POSIX named semaphores for synchronization.
@@ -43,7 +43,7 @@ At its core, this is a Producer–Consumer problem implemented with:
   
 ------
 
-# File Structure
+## File Structure
 ```bash
 task_queue/
 ├── manager.c       # Producer process code
@@ -54,7 +54,7 @@ task_queue/
 ````
 ------
 
-# System Calls & Libraries Used
+## System Calls & Libraries Used
 - shm_open() : Create or open a POSIX shared memory object
 - ftruncate() : Set the size of shared memory
 - mmap()	Map : shared memory to process address space
@@ -65,7 +65,7 @@ task_queue/
 
 -------
 
-🚀 How to Run
+## How to Run
 1. Build
 ```chmod +x build.sh```
 ```./build.sh```
@@ -99,7 +99,7 @@ ipcrm -m <id>  # (to manually remove if needed)
   
 --------
 
-# Concepts Demonstrated
+## Concepts Demonstrated
 - Concept	Implementation
 - Inter-process communication	POSIX Shared Memory (shm_open, mmap)
 - Synchronization	POSIX Semaphores
@@ -109,7 +109,7 @@ ipcrm -m <id>  # (to manually remove if needed)
   
 --------
 
-# Key Learnings
+## Key Learnings
 - How data consistency is maintained across processes using synchronization.
 - Why shared memory is the fastest IPC (zero kernel overhead per transfer).
 - How semaphores enforce order and safety in concurrent environments.
@@ -117,10 +117,11 @@ ipcrm -m <id>  # (to manually remove if needed)
   
 ------
 
-# Extension Ideas
+## Extension Ideas
 Once this base system works, you can extend it:
 - Add priority-based task scheduling (use multiple queues).
 - Implement task acknowledgment (workers send back completion status).
 - Add logging for queue status and performance.
 - Convert to Message Passing version using POSIX message queues for comparison.
+
 
